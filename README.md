@@ -18,3 +18,5 @@ Comment your own code likewise
 - Set as Output directory for "init" TXT files the "init" folder of your package (if you have no "init" folder at the root level of your package, create it!)
 - Set as Output directory for "interfaces" JSON file the "interfaces" folder of your package (if you have no "interface" folder at the root level of your package, create it!)
 - Don't forget to set the library name in the Preference pane before hitting the "Run" button.
+
+4. To see more examples, you can download the cage library (www.bachproject.net/cage), containing the Doctor Max sources for all of its abstractions, as "dummy" .c files)
