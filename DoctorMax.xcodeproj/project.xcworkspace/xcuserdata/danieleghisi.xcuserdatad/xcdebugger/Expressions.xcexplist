@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[DoctorMaxAppDelegate CreateFiles:]:DoctorMaxAppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "process_file:main.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "method_name[curr_method]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "process_help_file:main.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "section[1]">
+            </PersistentString>
+            <PersistentString
+               value = "section[2]">
+            </PersistentString>
+            <PersistentString
+               value = "section[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

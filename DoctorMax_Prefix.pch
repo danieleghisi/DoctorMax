@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'DoctorMax' target in the 'DoctorMax' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

@@ -1,0 +1,388 @@
+// !$*UTF8*$!
+{
+	089C165DFE840E0CC02AAC07 /* English */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {886, 414}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 45}";
+		};
+	};
+	1E0152E41B45A11E00203DEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1E1F6EBD181DBB6C006DC495 /* MySaveMenuController.m */;
+		name = "MySaveMenuController.m: 37";
+		rLen = 0;
+		rLoc = 1069;
+		rType = 0;
+		vrLen = 1280;
+		vrLoc = 1153;
+	};
+	1E0152FE1B45A22500203DEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1926";
+		rLen = 0;
+		rLoc = 78951;
+		rType = 0;
+		vrLen = 1436;
+		vrLoc = 76662;
+	};
+	1E01532C1B45A69F00203DEA /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* DoctorMaxAppDelegate.m */;
+		name = "DoctorMaxAppDelegate.m: 30";
+		rLen = 0;
+		rLoc = 1247;
+		rType = 0;
+		vrLen = 2467;
+		vrLoc = 369;
+	};
+	1E1F6EA5181DBA66006DC495 /* DoctorMax */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		libgmallocEnabled = 0;
+		name = DoctorMax;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		variableFormatDictionary = {
+		};
+	};
+	1E1F6EB8181DBA7D006DC495 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	1E1F6EB9181DBA7D006DC495 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	1E1F6EBC181DBB6C006DC495 /* MySaveMenuController.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1056, 551}}";
+			sepNavSelRange = "{224, 6}";
+			sepNavVisRange = "{0, 326}";
+		};
+	};
+	1E1F6EBD181DBB6C006DC495 /* MySaveMenuController.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1056, 1014}}";
+			sepNavSelRange = "{1069, 0}";
+			sepNavVisRange = "{1153, 1280}";
+		};
+	};
+	1E3B488C181DC3F500C6D60E /* DoctorMaxAppDelegate.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = DoctorMaxAppDelegate.h;
+		path = /Users/danieleghisi/Documents/bach_STUFF/DoctorMax/DoctorMax/DoctorMaxAppDelegate.h;
+		sourceTree = "<absolute>";
+	};
+	1E3B4976181DD6B300C6D60E /* PlistBookmark */ = {
+		isa = PlistBookmark;
+		fRef = 8D1107310486CEB800E47090 /* DoctorMax-Info.plist */;
+		fallbackIsa = PBXBookmark;
+		isK = 0;
+		kPath = (
+		);
+		name = "/Users/danieleghisi/Documents/bach_STUFF/DoctorMax/DoctorMax/DoctorMax-Info.plist";
+		rLen = 0;
+		rLoc = 9223372036854775808;
+	};
+	1E61A4121832EEC500152A29 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 089C165DFE840E0CC02AAC07 /* English */;
+		name = "InfoPlist.strings: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 45;
+		vrLoc = 0;
+	};
+	1E73137118D90587008C9091 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3F00F4B6AF500CF3369 /* DoctorMax_Prefix.pch */;
+		name = "DoctorMax_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 149;
+		vrLoc = 0;
+	};
+	1E79F16E183C2E640071F540 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1E79F16F183C2E640071F540 /* queue.h */;
+		name = "queue.h: 216";
+		rLen = 63;
+		rLoc = 7047;
+		rType = 0;
+		vrLen = 1021;
+		vrLoc = 6524;
+	};
+	1E79F16F183C2E640071F540 /* queue.h */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.c.h;
+		name = queue.h;
+		path = /Developer/SDKs/MacOSX10.6.sdk/usr/include/dispatch/queue.h;
+		sourceTree = "<absolute>";
+	};
+	1E8BFC8B190D744700396FEA /* main.m:1457 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 29B97316FDCFA39411CA2CEA /* main.m */;
+		functionName = "process_file()";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 1457;
+		location = "Doctor Max";
+		modificationTime = 467048488.289588;
+		originalNumberOfMultipleMatches = 1;
+		state = 2;
+	};
+	1ECAE4421BD6982B00DB5DB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1186";
+		rLen = 0;
+		rLoc = 47786;
+		rType = 0;
+		vrLen = 1007;
+		vrLoc = 47128;
+	};
+	1ECAE44A1BD6986900DB5DB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1198";
+		rLen = 0;
+		rLoc = 48091;
+		rType = 0;
+		vrLen = 102;
+		vrLoc = 46050;
+	};
+	1ECAE4671BD6989800DB5DB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 256AC3D90F4B6AC300CF3369 /* DoctorMaxAppDelegate.m */;
+		name = "DoctorMaxAppDelegate.m: 39";
+		rLen = 0;
+		rLoc = 1656;
+		rType = 0;
+		vrLen = 2156;
+		vrLoc = 186;
+	};
+	1ECAE4681BD6989800DB5DB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1182";
+		rLen = 0;
+		rLoc = 47708;
+		rType = 0;
+		vrLen = 885;
+		vrLoc = 47278;
+	};
+	1ECAE4691BD6989800DB5DB1 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1198";
+		rLen = 0;
+		rLoc = 48091;
+		rType = 0;
+		vrLen = 111;
+		vrLoc = 46050;
+	};
+	1ECE64A91A697B4000D0CD78 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1E1F6EBC181DBB6C006DC495 /* MySaveMenuController.h */;
+		name = "MySaveMenuController.h: 11";
+		rLen = 6;
+		rLoc = 224;
+		rType = 0;
+		vrLen = 326;
+		vrLoc = 0;
+	};
+	1EE5165B1921291C001E53A0 /* MySaveMenuController.m:76 */ = {
+		isa = PBXFileBreakpoint;
+		actions = (
+		);
+		breakpointStyle = 0;
+		continueAfterActions = 0;
+		countType = 0;
+		delayBeforeContinue = 0;
+		fileReference = 1E1F6EBD181DBB6C006DC495 /* MySaveMenuController.m */;
+		functionName = "-doOpen:";
+		hitCount = 0;
+		ignoreCount = 0;
+		lineNumber = 76;
+		location = "Doctor Max";
+		modificationTime = 467048488.663864;
+		originalNumberOfMultipleMatches = 1;
+		state = 1;
+	};
+	1EE5168819212B55001E53A0 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1E3B488C181DC3F500C6D60E /* DoctorMaxAppDelegate.h */;
+		name = "DoctorMaxAppDelegate.h: 63";
+		rLen = 0;
+		rLoc = 2413;
+		rType = 0;
+		vrLen = 1363;
+		vrLoc = 2211;
+	};
+	256AC3D80F4B6AC300CF3369 /* DoctorMaxAppDelegate.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {726, 1391}}";
+			sepNavSelRange = "{1096, 0}";
+			sepNavVisRange = "{1353, 1075}";
+			sepNavWindowFrame = "{{15, 315}, {750, 558}}";
+		};
+	};
+	256AC3D90F4B6AC300CF3369 /* DoctorMaxAppDelegate.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1056, 3354}}";
+			sepNavSelRange = "{1656, 0}";
+			sepNavVisRange = "{186, 2156}";
+		};
+	};
+	256AC3F00F4B6AF500CF3369 /* DoctorMax_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1050, 484}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 149}";
+		};
+	};
+	29B97313FDCFA39411CA2CEA /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeExecutable = 1E1F6EA5181DBA66006DC495 /* DoctorMax */;
+		activeTarget = 8D1107260486CEB800E47090 /* DoctorMax */;
+		addToTargets = (
+			8D1107260486CEB800E47090 /* DoctorMax */,
+		);
+		breakpoints = (
+			1E8BFC8B190D744700396FEA /* main.m:1457 */,
+			1EE5165B1921291C001E53A0 /* MySaveMenuController.m:76 */,
+		);
+		codeSenseManager = 1E1F6EB9181DBA7D006DC495 /* Code sense */;
+		executables = (
+			1E1F6EA5181DBA66006DC495 /* DoctorMax */,
+		);
+		expressions = (
+			"*count",
+			flag_line,
+			pch,
+			len,
+			this_entry,
+			all_found,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					878,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					668,
+					60,
+					20,
+					48.16259765625,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 467046760;
+			PBXWorkspaceStateSaveDate = 467046760;
+		};
+		perUserProjectItems = {
+			1E0152E41B45A11E00203DEA /* PBXTextBookmark */ = 1E0152E41B45A11E00203DEA /* PBXTextBookmark */;
+			1E0152FE1B45A22500203DEA /* PBXTextBookmark */ = 1E0152FE1B45A22500203DEA /* PBXTextBookmark */;
+			1E01532C1B45A69F00203DEA /* PBXTextBookmark */ = 1E01532C1B45A69F00203DEA /* PBXTextBookmark */;
+			1E3B4976181DD6B300C6D60E /* PlistBookmark */ = 1E3B4976181DD6B300C6D60E /* PlistBookmark */;
+			1E61A4121832EEC500152A29 /* PBXTextBookmark */ = 1E61A4121832EEC500152A29 /* PBXTextBookmark */;
+			1E73137118D90587008C9091 /* PBXTextBookmark */ = 1E73137118D90587008C9091 /* PBXTextBookmark */;
+			1E79F16E183C2E640071F540 /* PBXTextBookmark */ = 1E79F16E183C2E640071F540 /* PBXTextBookmark */;
+			1ECAE4421BD6982B00DB5DB1 /* PBXTextBookmark */ = 1ECAE4421BD6982B00DB5DB1 /* PBXTextBookmark */;
+			1ECAE44A1BD6986900DB5DB1 /* PBXTextBookmark */ = 1ECAE44A1BD6986900DB5DB1 /* PBXTextBookmark */;
+			1ECAE4671BD6989800DB5DB1 /* PBXTextBookmark */ = 1ECAE4671BD6989800DB5DB1 /* PBXTextBookmark */;
+			1ECAE4681BD6989800DB5DB1 /* PBXTextBookmark */ = 1ECAE4681BD6989800DB5DB1 /* PBXTextBookmark */;
+			1ECAE4691BD6989800DB5DB1 /* PBXTextBookmark */ = 1ECAE4691BD6989800DB5DB1 /* PBXTextBookmark */;
+			1ECE64A91A697B4000D0CD78 /* PBXTextBookmark */ = 1ECE64A91A697B4000D0CD78 /* PBXTextBookmark */;
+			1EE5168819212B55001E53A0 /* PBXTextBookmark */ = 1EE5168819212B55001E53A0 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 1E1F6EB8181DBA7D006DC495 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	29B97316FDCFA39411CA2CEA /* main.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1286, 30069}}";
+			sepNavSelRange = "{48091, 0}";
+			sepNavVisRange = "{46069, 1502}";
+			sepNavWindowFrame = "{{430, 177}, {1203, 701}}";
+		};
+	};
+	8D1107260486CEB800E47090 /* DoctorMax */ = {
+		activeExec = 0;
+		executables = (
+			1E1F6EA5181DBA66006DC495 /* DoctorMax */,
+		);
+	};
+}
