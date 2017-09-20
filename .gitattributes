@@ -2,3 +2,5 @@
 *.aif binary
 *.mid binary
 *.svg binary
+*.icns binary
+*.png binary
