@@ -18,7 +18,7 @@
 // Only used by bach (somehow private)
 #define SOURCES_PATH_NOTATION_MAXINTERFACE "/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/dg/notation_maxinterface.c"
 #define BACH_TUTORIAL_FOLDER "/Users/danieleghisi/Documents/Max 7/Packages/bach/docs/tutorials/bach-tut"
-#define SOURCES_PATH_DADA_OBJ_COMMONS "/Users/danieleghisi/max-sdk-7.0.3/source/dada/commons/dada.object.c"
+#define SOURCES_PATH_DADA_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 7/Packages/dada/source/commons/dada.object.c"
 
 #define MAX_DESCRIPTION_LINES 800
 #define MAX_DISCUSSION_LINES 100
