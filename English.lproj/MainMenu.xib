@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -1229,6 +1230,111 @@
                                     </subviews>
                                 </view>
                             </tabViewItem>
+                            <tabViewItem label="Patreon" identifier="Item 3" id="O8g-23-uZ2" userLabel="Patreon">
+                                <view key="view" id="48I-0G-uVI">
+                                    <rect key="frame" x="10" y="33" width="872" height="507"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button misplaced="YES" id="fYq-eL-oHb">
+                                            <rect key="frame" x="15" y="476" width="308" height="19"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Build code to post patrons in Max window" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="d1R-AV-MbU">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system" size="15"/>
+                                            </buttonCell>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="dIq-kg-6Zh" userLabel="patrons CSV">
+                                            <rect key="frame" x="189" y="448" width="653" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="bIf-lv-k6S">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="mUe-J8-iCa">
+                                            <rect key="frame" x="32" y="451" width="151" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Input members CSV file:" id="ksG-r4-BY1">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="ncN-uk-uEK" userLabel="patron .h">
+                                            <rect key="frame" x="189" y="418" width="653" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="3wg-G8-Dfp">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="vIx-lL-RwZ">
+                                            <rect key="frame" x="32" y="421" width="161" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Output patrons.h file:" id="O0M-cQ-i4a">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="yJg-NV-R4X" userLabel="copyrightline">
+                                            <rect key="frame" x="189" y="347" width="653" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Jzr-On-ULG">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="Nwm-MW-Boc">
+                                            <rect key="frame" x="32" y="350" width="97" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Copyright Line:" id="aBG-7W-ZPe">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="Uxo-LU-Gg2" userLabel="mintopsupporterpledge">
+                                            <rect key="frame" x="230" y="377" width="45" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="MKJ-6k-bn4">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="sXR-yq-o40">
+                                            <rect key="frame" x="32" y="380" width="198" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Minimum top-supporter pledge:" id="bpc-i2-BXV">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button misplaced="YES" id="pmi-RC-O1B">
+                                            <rect key="frame" x="32" y="323" width="342" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Add GPL3 license after the copyright" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="G98-ig-0f0">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" misplaced="YES" id="WNN-aI-K8V">
+                                            <rect key="frame" x="276" y="380" width="13" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="$" id="Aka-RF-ht0">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                            </tabViewItem>
                             <tabViewItem label="Result" identifier="2" id="Jmy-s3-sRA" userLabel="Overview">
                                 <view key="view" id="1Fg-PK-VbU">
                                     <rect key="frame" x="10" y="33" width="872" height="507"/>
@@ -1247,11 +1353,11 @@
                                             <rect key="frame" x="0.0" y="112" width="875" height="392"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <clipView key="contentView" identifier="mainTableView" id="2E8-Br-aKA">
-                                                <rect key="frame" x="1" y="17" width="873" height="374"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <rect key="frame" x="1" y="0.0" width="873" height="391"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <tableView identifier="tableViewOk" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="Kaw-hc-sOa" id="j6g-qq-NmI">
-                                                        <rect key="frame" x="0.0" y="0.0" width="873" height="19"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="873" height="374"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1399,7 +1505,6 @@
                                                         </connections>
                                                     </tableView>
                                                 </subviews>
-                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </clipView>
                                             <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Rm2-X0-I1R">
                                                 <rect key="frame" x="1" y="338" width="695" height="16"/>
@@ -1427,17 +1532,15 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <clipView key="contentView" id="hNT-e1-Gqw">
                                                 <rect key="frame" x="1" y="1" width="850" height="462"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="651">
+                                                    <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" smartInsertDelete="YES" id="651">
                                                         <rect key="frame" x="0.0" y="58" width="850" height="462"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <size key="minSize" width="850" height="462"/>
                                                         <size key="maxSize" width="869" height="10000000"/>
                                                         <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <size key="minSize" width="850" height="462"/>
-                                                        <size key="maxSize" width="869" height="10000000"/>
                                                     </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1542,6 +1645,12 @@
                 <outlet property="math_category" destination="gWd-4m-djN" id="EUB-0G-bFG"/>
                 <outlet property="only_if_it_has_arguments" destination="Jga-OW-FXH" id="dh6-wJ-5uE"/>
                 <outlet property="overview_label" destination="JXz-GI-ZNb" id="UcX-Ns-8ah"/>
+                <outlet property="patrons_addgpl3license" destination="pmi-RC-O1B" id="Ye9-gr-UeD"/>
+                <outlet property="patrons_build" destination="fYq-eL-oHb" id="wiH-30-9X5"/>
+                <outlet property="patrons_copyright" destination="yJg-NV-R4X" id="8ys-HN-cpa"/>
+                <outlet property="patrons_mintopsupporterpledge" destination="Uxo-LU-Gg2" id="Iqt-T4-S4t"/>
+                <outlet property="patrons_source_csv" destination="dIq-kg-6Zh" id="s6E-qY-sMK"/>
+                <outlet property="patrons_target_h" destination="ncN-uk-uEK" id="iWB-wK-t3e"/>
                 <outlet property="produce_c74_contents_xml_file" destination="697" id="699"/>
                 <outlet property="produce_interfaces_json_file" destination="735" id="739"/>
                 <outlet property="progress_indicator" destination="556" id="557"/>

@@ -9,6 +9,7 @@
 #import "DoctorMaxAppDelegate.h"
 #include "DoctorMax.h"
 #include "DMEntry.h"
+#include <time.h>
 
 @implementation DoctorMaxAppDelegate
 @synthesize window;
@@ -17,14 +18,16 @@
 	// Insert code here to initialize your application 
 	
 #ifdef BACH_REF // bach initialization
-    [source_folder1 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/mains/aa"];
-	[source_folder2 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/abstractions/aa"];
-	[source_folder3 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/mains/dg"];
-	[source_folder4 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/abstractions/dg"];
-	[commonref_file1 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/dg/bach_doc_commons_dg.h"];
-	[commonref_file2 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/aa/bach_doc_commons_aa.h"];
+    [source_folder1 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/mains/"];
+	[source_folder2 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/abstractions/"];
+    [source_folder3 setStringValue:@""];
+    [source_folder4 setStringValue:@""];
+    [recursive_folder1 setState:1];
+    [recursive_folder2 setState:1];
+	[commonref_file1 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/doc/bach_doc_commons.h"];
+	[commonref_file2 setStringValue:@""];
     [commonref_file3 setStringValue:@""];
-	[substitutions_file setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/bach_doc_substitutions.h"];
+	[substitutions_file setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/doc/bach_doc_substitutions.h"];
     [xml_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/docs/refpages/bach_ref"];
 	[txt_init_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/init"];
 	[json_interfaces_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/interfaces"];
@@ -38,6 +41,16 @@
     [help_recursive setState:0];
     [add_syntax_to_messages setState:1];
     [only_if_it_has_arguments setState:1];
+    [patrons_build setState:1];
+    [patrons_source_csv setStringValue:@"/Users/danieleghisi/Downloads/Members_2774862.csv"];
+    [patrons_target_h setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/patreon/patrons.h"];
+    [patrons_addgpl3license setState:1];
+    
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+
+    [patrons_copyright setStringValue:[NSString stringWithFormat: @"Copyright (C) 2010-%d Andrea Agostini and Daniele Ghisi", tm.tm_year + 1900]];
+    [patrons_mintopsupporterpledge setStringValue:@"8"];
 #endif
 	
 	[currently_open_file setStringValue:@""];
@@ -93,6 +106,13 @@
 - (NSTextField *) help_exclude { return help_exclude; }
 - (NSButton *) help_recursive { return help_recursive; }
 
+
+- (NSButton *) patrons_build { return patrons_build; }
+- (NSTextField *) patrons_source_csv { return patrons_source_csv; }
+- (NSTextField *) patrons_target_h { return patrons_target_h; }
+- (NSButton *) patrons_addgpl3license { return patrons_addgpl3license; }
+- (NSTextField *) patrons_copyright { return patrons_copyright; }
+- (NSTextField *) patrons_mintopsupporterpledge { return patrons_mintopsupporterpledge; }
 
 void SetTextFromBrowsing(NSTextField* field, char folders)
 {
@@ -247,7 +267,7 @@ int modules_cmp_alphabetically(const void *a, const void *b)
 	//	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
 	//    dispatch_async(queue, ^{
 	//		dispatch_sync(dispatch_get_main_queue(), ^{
-	produceFiles([build_xml_files state] ? 1 : 0, [build_init_files state] ? 1 : 0,
+    produceFiles([build_xml_files state] ? 1 : 0, [build_init_files state] ? 1 : 0,
 					[[source_folder1 stringValue] UTF8String], [[source_folder2 stringValue] UTF8String], [[source_folder3 stringValue] UTF8String], [[source_folder4 stringValue] UTF8String],
 					[recursive_folder1 state] ? 1 : 0, [recursive_folder2 state] ? 1 : 0, [recursive_folder3 state] ? 1 : 0, [recursive_folder4 state] ? 1 : 0, 
 					[[commonref_file1 stringValue] UTF8String], [[commonref_file2 stringValue] UTF8String], [[commonref_file3 stringValue] UTF8String], [[substitutions_file stringValue] UTF8String],
@@ -287,6 +307,11 @@ int modules_cmp_alphabetically(const void *a, const void *b)
         
         for (i = 0; i < MAX_HELP_EXCLUDE; i++)
             free(exclude[i]);
+    }
+    
+    // PRODUCE PATRONS CODE?
+    if ([patrons_build state]) {
+        producePatronsCode([[patrons_source_csv stringValue] UTF8String], [[patrons_target_h stringValue] UTF8String], error_log, [patrons_addgpl3license state], [[patrons_copyright stringValue] UTF8String], atol([[patrons_mintopsupporterpledge stringValue] UTF8String]));
     }
     
     
@@ -433,7 +458,13 @@ int modules_cmp_alphabetically(const void *a, const void *b)
                      [help_exclude stringValue],
                      [commonref_file3 stringValue],
                      [add_syntax_to_messages state],
-                     [only_if_it_has_arguments state]
+                     [only_if_it_has_arguments state],
+                     [patrons_build state] ? 1 : 0,
+                     [patrons_source_csv stringValue],
+                     [patrons_target_h stringValue],
+                     [patrons_addgpl3license state] ? 1 : 0,
+                     [patrons_copyright stringValue],
+                     [patrons_mintopsupporterpledge stringValue]
                      ];
 	
 	[str writeToFile:filename atomically:TRUE encoding:NSUTF8StringEncoding error:NULL];
@@ -487,6 +518,12 @@ int modules_cmp_alphabetically(const void *a, const void *b)
             case 35: [commonref_file3 setStringValue:line]; break;
             case 36: [add_syntax_to_messages setState:[line intValue]]; break;
             case 37: [only_if_it_has_arguments setState:[line intValue]]; break;
+            case 38: [patrons_build setState:[line intValue]]; break;
+            case 39: [patrons_source_csv setStringValue:line]; break;
+            case 40: [patrons_target_h setStringValue:line]; break;
+            case 41: [patrons_addgpl3license setState:[line intValue]]; break;
+            case 42: [patrons_copyright setStringValue:line]; break;
+            case 43: [patrons_mintopsupporterpledge setStringValue:line]; break;
 		}
 	}
 	[currently_open_file setStringValue:filename];

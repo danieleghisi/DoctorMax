@@ -8,20 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-// Folders containing source files. You can define up to 4 source folders.
-// Folders you don't need must be left as ""
-#define SOURCES_FOLDER_1 "/Developer/SDKs/MaxSDK-6.1.3/bach/mains/aa"
-#define SOURCES_FOLDER_2 "/Developer/SDKs/MaxSDK-6.1.3/bach/abstractions/aa"
-#define SOURCES_FOLDER_3 "/Developer/SDKs/MaxSDK-6.1.3/bach/mains/dg"
-#define SOURCES_FOLDER_4 "/Developer/SDKs/MaxSDK-6.1.3/bach/abstractions/dg"
-
-// Folders containing definitions of common reference portions.
-// You can define up to 2 common source folders.
-// Folders you don't need must be left as ""
-#define SOURCE_COMMON_REFERENCE_1 "/Developer/SDKs/MaxSDK-6.1.3/bach/commons/dg/bach_doc_commons_dg.h"
-#define SOURCE_COMMON_REFERENCE_2 "/Developer/SDKs/MaxSDK-6.1.3/bach/commons/aa/bach_doc_commons_aa.h"
-#define DESTINATION_XML_PATH "/Applications/Max 6.1/packages/bach/docs/refpages/bach_ref"
-
 @interface DoctorMaxAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource> {
     NSWindow *window;
 	IBOutlet NSTextField *source_folder1;
@@ -79,7 +65,14 @@
     IBOutlet NSButton *add_syntax_to_messages;
     IBOutlet NSButton *only_if_it_has_arguments;
 
-    
+    // Patrons
+    IBOutlet NSButton *patrons_build;
+    IBOutlet NSTextField *patrons_source_csv;
+    IBOutlet NSTextField *patrons_target_h;
+    IBOutlet NSButton *patrons_addgpl3license;
+    IBOutlet NSTextField *patrons_copyright;
+    IBOutlet NSTextField *patrons_mintopsupporterpledge;
+
     // overview list
     NSMutableArray *list;
     IBOutlet NSTableView *idTableView;
@@ -147,6 +140,10 @@
 - (NSButton *) help_recursive;
 - (NSTextField *) help_output_filename;
 - (NSTextField *) help_exclude;
+
+- (NSButton *) patrons_buil;
+- (NSTextField *) patrons_source_csv;
+- (NSTextField *) patrons_target_h;
 
 //- (UITableViewCell *)tableView:(UITableView *)tableView
 //       cellForRowAtIndexPath:(NSIndexPath *)indexPath

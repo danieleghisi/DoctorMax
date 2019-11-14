@@ -16,9 +16,10 @@
 #define BACH_REF
 
 // Only used by bach (somehow private)
-#define SOURCES_PATH_NOTATION_MAXINTERFACE "/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/dg/notation_maxinterface.c"
+#define SOURCES_PATH_NOTATION_MAXINTERFACE "/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/notation/notation_maxinterface.c"
 #define BACH_TUTORIAL_FOLDER "/Users/danieleghisi/Documents/Max 7/Packages/bach/docs/tutorials/bach-tut"
 #define SOURCES_PATH_DADA_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 7/Packages/dada/source/commons/dada.object.c"
+#define SOURCES_PATH_EARS_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 7/Packages/ears/source/commons/ears.buf.object.c"
 
 #define MAX_DESCRIPTION_LINES 800
 #define MAX_DISCUSSION_LINES 100
@@ -43,10 +44,15 @@
 #define MAX_MODULES 500
 #define MAX_HELP_MODULES 1500
 #define MAX_HELP_EXCLUDE 50
+#define MAX_ALIASES 2000
 
 #define MAX_HELP_FILE_PATH_DEPTH 5
 #define MAX_HELP_FILE_NUM_OBJS 10
 
+
+char harvested_alias[MAX_ALIASES][MAX_SINGLE_ELEM_CHARS];
+char harvested_realname[MAX_ALIASES][MAX_SINGLE_ELEM_CHARS];
+long num_aliases;
 
 typedef enum _status_values
 {
@@ -143,6 +149,8 @@ void produceFiles(char export_XMLs, char export_TXTs,
 
 
 void produceHelpFiles(const char *source_folder, char recursive, const char *help_router, const char *output_file, NSTextField *progress_label, NSTextView *error_log, t_doctor_max_help_stats *stats, long num_exclude_files, char **exclude_files);
+
+void producePatronsCode(const char *source_members_CSV, const char *target_file, NSTextView *error_log, char addGpl3License, const char *copyright, short int min_top_supporters_pledge);
 
 
 

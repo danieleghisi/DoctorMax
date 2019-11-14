@@ -38,33 +38,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.m"
-            timestampString = "512829964.05549"
+            timestampString = "595435824.1433721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2551"
-            endingLineNumber = "2551"
-            landmarkName = "obtain_common_reference()"
-            landmarkType = "7">
+            startingLineNumber = "2761"
+            endingLineNumber = "2761"
+            landmarkName = "replace_char"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "main.m"
-            timestampString = "512829964.05549"
+            timestampString = "595435824.143482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1449"
-            endingLineNumber = "1449"
-            landmarkName = "process_file()"
-            landmarkType = "7">
+            startingLineNumber = "2767"
+            endingLineNumber = "2767"
+            landmarkName = "replace_char"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "replace_char"
+                  moduleName = "Doctor Max"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danieleghisi/DoctorMax/main.m"
+                  timestampString = "590665747.403403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2764"
+                  endingLineNumber = "2764"
+                  offsetFromSymbolStart = "506">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "replace_char"
+                  moduleName = "Doctor Max"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/danieleghisi/DoctorMax/main.m"
+                  timestampString = "590665747.406307"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2764"
+                  endingLineNumber = "2764"
+                  offsetFromSymbolStart = "510">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

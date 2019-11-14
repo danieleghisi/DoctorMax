@@ -17,6 +17,10 @@
 #include "DoctorMax.h"
 
 
+
+void harvest_aliases(char *path, char recursive, NSTextView *error_log);
+void add_alias(char *alias, char *realname);
+                       
 void process_directory(char export_XMLs, char *path, char recursive,
 					   char *common_ref_file1, char *common_ref_file2, char *common_ref_file3, char *output_folder,
 					   char sort_methods, char sort_attributes, char export_in_out_as_misc, char export_discussion_as_misc,
@@ -209,8 +213,19 @@ void produceFiles(char export_XMLs, char export_TXTs,
 		}
 	}
 
+    // output in log and progress label
+    [progress_label setStringValue:@"Harvesting aliases..."];
+
+    // In order to proper write the @seealso tags in the XML files, we need to harvest all aliases, since they'll have to be treated separately
+    num_aliases = 0;
+    harvest_aliases(sources_folder1, folder1_recursive, error_log);
+    harvest_aliases(sources_folder2, folder2_recursive, error_log);
+    harvest_aliases(sources_folder3, folder3_recursive, error_log);
+    harvest_aliases(sources_folder4, folder4_recursive, error_log);
+
 //    long count = 0; // number of written elements
 	
+    // Now we actually process the directories and write all files.
 	process_directory(export_XMLs, sources_folder1, folder1_recursive, common_ref_file1, common_ref_file2, common_ref_file3,
                       XML_output_folder, sort_methods, sort_attributes, export_in_out_as_misc, export_discussion_as_misc,
 					  progress_label, error_log, 
@@ -337,6 +352,121 @@ void process_directory(char export_XMLs, char *path, char recursive,
 }
 
 
+void add_alias(char *alias, char *realname)
+{
+    bool found = false;
+    for (long i = 0; i < num_aliases; i++) {
+        if (strcmp(alias, harvested_alias[i]) == 0) {
+            found = 1;
+            break;
+        }
+    }
+            
+    if (!found && num_aliases < MAX_ALIASES - 1) {
+        strcpy(harvested_alias[num_aliases], alias);
+        strcpy(harvested_realname[num_aliases], realname);
+        num_aliases++;
+    }
+}
+
+void harvest_aliases(char *path, char recursive, NSTextView *error_log)
+{
+    DIR *dir;
+    struct dirent *ent;
+    if (strlen(path) > 0) {
+        if ((dir = opendir (path)) != NULL) {
+            /* print all the files and directories within directory */
+            while ((ent = readdir (dir)) != NULL) {
+                char str[FILENAME_MAX];
+                long len;
+                
+                if (!strcmp(ent->d_name, "."))
+                    continue;
+                
+                if (!strcmp(ent->d_name, ".."))
+                    continue;
+                
+                struct stat st;
+                lstat(ent->d_name, &st);
+                if(ent->d_type == DT_DIR) {
+                    if (recursive) {
+                        char buf[PATH_MAX + 1];
+                        snprintf(buf, PATH_MAX, "%s/%s", path, ent->d_name);
+                        harvest_aliases(buf, recursive, error_log);
+                    }
+                } else {
+                    
+                    strcpy(str, ent->d_name);
+                    len = strlen(str);
+                    if ((len > 2 && str[len-1] == 'c' && str[len-2] == '.') || // C file
+                        (len > 4 && str[len-1] == 'p' && str[len-2] == 'p' && str[len-3] == 'c' && str[len-4] == '.')) { // C++ file
+                        if (contains_metadata(path, ent->d_name, error_log)) {
+                            char fullfilename_read[PATH_MAX];
+                            long len_path_read = strlen(path);
+                            strcpy(fullfilename_read, path);
+                            fullfilename_read[len_path_read] = '/';
+                            strcpy(fullfilename_read + len_path_read + 1, ent->d_name);
+                            
+                            FILE *fp_read = fopen(fullfilename_read, "r");
+                            
+                            char line[MAX_LINE_CHARS];
+                            char name[MAX_SINGLE_ELEM_CHARS];
+                            char realname[MAX_SINGLE_ELEM_CHARS];
+                            name[0] = realname[0] = 0;
+                            while (true) {
+                                if (fgets(line, sizeof line, fp_read) == NULL)
+                                    break;
+                                
+                                char *trimmed = lefttrim(line, false);
+                                if (trimmed) {
+                                    if (strncmp(trimmed, "@name", 5) == 0) {
+                                        trimmed = lefttrim(trimmed + 5, false);
+                                        while (!trimmed && fgets(line, sizeof line, fp_read) != NULL)
+                                            trimmed = lefttrim(line, true);
+                                        if (trimmed) {
+                                            strncpy(name, trimmed, MAX_SINGLE_ELEM_CHARS-1);
+                                            name[MAX_SINGLE_ELEM_CHARS-1] = 0;
+                                            righttrim(name, true);
+                                            if (realname[0])
+                                                break;
+                                        }
+                                    }
+                                    if (strncmp(trimmed, "@realname", 9) == 0) {
+                                        trimmed = lefttrim(trimmed + 9, false);
+                                        while (!trimmed && fgets(line, sizeof line, fp_read) != NULL)
+                                            trimmed = lefttrim(line, true);
+                                        if (trimmed) {
+                                            strncpy(realname, trimmed, MAX_SINGLE_ELEM_CHARS-1);
+                                            realname[MAX_SINGLE_ELEM_CHARS-1] = 0;
+                                            righttrim(realname, true);
+                                            if (name[0])
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if (name[0] && realname[0]) {
+                                if (strcmp(name, realname) != 0) {
+                                    add_alias(name, realname);
+                                }
+                            }
+                            
+                            fclose(fp_read);
+                            
+                        }
+                    }
+                }
+            }
+            closedir (dir);
+        } else {
+            /* could not open directory */
+            [error_log setString:[NSString stringWithFormat: @"%@ %s %s\n", [error_log string], "Failed to open folder", path]];
+        }
+    }
+}
+
+
 char is_string_in_string_array(char *str, char **strarray, long num_elems)
 {
 	long i;
@@ -450,6 +580,7 @@ void process_file(char export_XMLs, char *path, char *filename,
 	
 	char obj_name[MAX_SINGLE_ELEM_CHARS]; // used name, e.g. "bach.*"
 	char obj_realname[MAX_SINGLE_ELEM_CHARS]; // real name, ignoring alias, e.g. "bach.times"
+    char obj_hiddenalias[MAX_SINGLE_ELEM_CHARS]; // an additional hidden alias
 	char obj_type = k_TYPE_OBJECT;
 	char digest[MAX_LINE_CHARS];
 	char *description[MAX_DESCRIPTION_LINES];
@@ -624,8 +755,8 @@ void process_file(char export_XMLs, char *path, char *filename,
 	for (i = 0; i < 20; i++)
 		category[i] = (char *)malloc(MAX_SINGLE_ELEM_CHARS * sizeof(char));
 	
-	obj_name[0] = obj_realname[0] = digest[0] = module[0] = author[0] = owner[0] = 0;
-	
+	obj_name[0] = obj_realname[0] = digest[0] = module[0] = author[0] = owner[0] = obj_hiddenalias[0] = 0;
+
 	long curr_in = -1, curr_out = -1, curr_arg = -1, curr_method = -1, curr_marg = -1, curr_mattr = -1, curr_attr = -1;
 	char active_is_what = 0; // if this is 2 we're writing the inlet, 3 we're writing the outlet, 4 = arguments, 5 = methods, 6 = method arguments, 7 = attribtues, 8 = method attributes
 	char header = true;
@@ -694,7 +825,17 @@ void process_file(char export_XMLs, char *path, char *filename,
 					strncpy(obj_realname, trimmed, MAX_SINGLE_ELEM_CHARS - 1);
 				righttrim(obj_realname, true);
 				
-			} else if (!parsing_sub_file && !parsing_substitution_file && module[0] == 0 && strncmp(trimmed, "@module", 7) == 0) {
+            } else if (!parsing_sub_file && !parsing_substitution_file && obj_hiddenalias[0] == 0 && strncmp(trimmed, "@hiddenalias", 12) == 0) {
+                found = true;
+                description_ongoing = discussion_ongoing = 0;
+                trimmed = lefttrim(trimmed + 12, false);
+                while (!trimmed && fgets(line, sizeof line, fp_read) != NULL)
+                    trimmed = lefttrim(line, true);
+                if (trimmed)
+                    strncpy(obj_hiddenalias, trimmed, MAX_SINGLE_ELEM_CHARS - 1);
+                righttrim(obj_hiddenalias, true);
+
+            } else if (!parsing_sub_file && !parsing_substitution_file && module[0] == 0 && strncmp(trimmed, "@module", 7) == 0) {
 				found = true;
 				description_ongoing = discussion_ongoing = 0;
 				trimmed = lefttrim(trimmed + 7, false);
@@ -908,7 +1049,8 @@ void process_file(char export_XMLs, char *path, char *filename,
 				} else {
 					parsing_sub_file = true;
 				}
-				
+
+                
 			} else if (strncmp(trimmed, "CLASS_STICKY_ATTR", 17) == 0) { // was: 18: WHY?
 				char *temp1 = strstr(trimmed, "\"");
 				if (temp1 && strncmp(temp1+1, "category", 8) == 0) {
@@ -1156,6 +1298,9 @@ void process_file(char export_XMLs, char *path, char *filename,
 								} else if (strncmp(trimmed + 11, "LONG", 4) == 0) {
 									strcpy(attr_type[curr_attr], "int");
 									found_attr = true;
+                                } else if (strncmp(trimmed + 11, "ATOM_LONG", 9) == 0) {
+                                    strcpy(attr_type[curr_attr], "int");
+                                    found_attr = true;
 								} else if (strncmp(trimmed + 11, "CHAR", 4) == 0) {
 									strcpy(attr_type[curr_attr], "int");
 									found_attr = true;
@@ -1919,11 +2064,15 @@ void process_file(char export_XMLs, char *path, char *filename,
 		if (fp_database) {
 			if (strcmp(obj_name, obj_realname)) 
 				fprintf(fp_database,"max db.addvirtual alias %s %s;\n", obj_name, obj_realname);
+            if (obj_hiddenalias[0])
+                fprintf(fp_database,"max db.addvirtual alias %s %s;\n", obj_hiddenalias, obj_realname);
 		}
 		
 		if (fp_objectmappings) {
 			if (strcmp(obj_name, obj_realname)) 
 				fprintf(fp_objectmappings,"max objectfile %s %s;\n", obj_name, obj_realname);
+            if (obj_hiddenalias[0])
+                fprintf(fp_objectmappings,"max objectfile %s %s;\n", obj_hiddenalias, obj_realname);
 		}
 		
 		if (fp_objectlist) {
@@ -2153,9 +2302,9 @@ void process_file(char export_XMLs, char *path, char *filename,
                     fprintf(fp_write, "\t\t\t\tMessage attributes:<br />\n");
                     for (h = 0; h < method_num_attrs[i]; h++) {
                         if (method_attr_default[i][h][0])
-                            fprintf(fp_write, "\t\t\t\t\n<m>@%s</m> (%s, default: %s): %s<br />\n", method_attr_name[i][h], method_attr_type[i][h], method_attr_default[i][h], method_attr_digest[i][h]);
+                            fprintf(fp_write, "\t\t\t\t<m>@%s</m> (%s, default: %s): %s<br />\n", method_attr_name[i][h], method_attr_type[i][h], method_attr_default[i][h], method_attr_digest[i][h]);
                         else
-                            fprintf(fp_write, "\t\t\t\t\n<m>@%s</m> (%s): %s<br />\n", method_attr_name[i][h], method_attr_type[i][h], method_attr_digest[i][h]);
+                            fprintf(fp_write, "\t\t\t\t<m>@%s</m> (%s): %s<br />\n", method_attr_name[i][h], method_attr_type[i][h], method_attr_digest[i][h]);
                     }
                     fprintf(fp_write, "\t\t\t\t<br />\n");
                 }
@@ -2260,8 +2409,19 @@ void process_file(char export_XMLs, char *path, char *filename,
 						strncpy(tutorial_file_name, seealso[i], MAX_SINGLE_ELEM_CHARS);
 					
 					fprintf(fp_write,"\t\t<seealso name=\"%s\" module=\"%s\" type=\"tutorial\" />\n", tutorial_file_name, module);
-				} else
-					fprintf(fp_write,"\t\t<seealso name=\"%s\" />\n", seealso[i]);
+                } else {
+                    // gotta detect whether seealso[i] is an alias for something else.
+                    long alias_idx = -1;
+                    for (long a = 0; a < num_aliases; a++)
+                        if (strcmp(harvested_alias[a], seealso[i]) == 0) {
+                            alias_idx = a;
+                            break;
+                        }
+                    if (alias_idx > 0)
+                        fprintf(fp_write,"\t\t<seealso name=\"%s\" display=\"%s\" type=\"refpage\" />\n", harvested_realname[alias_idx], seealso[i]);
+                    else
+                        fprintf(fp_write,"\t\t<seealso name=\"%s\" />\n", seealso[i]);
+                }
 			}
 			fprintf(fp_write,"\t</seealsolist>\n\n");
 			
@@ -2705,6 +2865,8 @@ void change_section_name(char *name)
         newname[0] = toupper(newname[0]);
     if (strcmp(newname, "Llll") == 0)
         snprintf(newname, MAX_SINGLE_ELEM_CHARS-1, "Lisp-like linked lists");
+    if (strcmp(newname, "Bell") == 0)
+        snprintf(newname, MAX_SINGLE_ELEM_CHARS-1, "Evaluation language (bell)");
 #else
     if (strlen(newname) > 1)
         newname[0] = toupper(newname[0]);
@@ -3144,3 +3306,148 @@ void produceHelpFiles(const char *source_folder, char recursive, const char *hel
         fclose(fp_write);
     }
 }
+
+/// PATREON STUFF
+
+typedef struct _patron {
+    char name[128];
+    char active;
+    short int pledge;
+} t_patron;
+
+void producePatronsCode(const char *source_members_CSV, const char *target_file, NSTextView *error_log, char addGpl3License, const char *copyright, short int min_top_supporters_pledge)
+{
+    FILE *fp_write = fopen(target_file, "w");
+    FILE *fp_read = fopen(source_members_CSV, "r");
+
+    if (fp_read == NULL) {
+        [error_log setString:[NSString stringWithFormat: @"%@ Failed to open members CSV file for read.\n", [error_log string]]];
+        return;
+    }
+
+    if (fp_write == NULL) {
+        [error_log setString:[NSString stringWithFormat: @"%@ Failed to open patrons.h file for write.\n", [error_log string]]];
+        return;
+    }
+
+
+    fprintf(fp_write, "/*\n");
+    fprintf(fp_write, " *  patrons.h\n");
+    fprintf(fp_write, " * (This file has been generated automatically by Doctor Max. You may not want to edit this file directly).\n");
+    fprintf(fp_write, " *\n");
+    if (copyright) {
+        fprintf(fp_write, " * %s\n", copyright);
+        fprintf(fp_write, " *\n");
+    }
+    if (addGpl3License) {
+        fprintf(fp_write, " * This program is free software: you can redistribute it and/or modify it\n");
+        fprintf(fp_write, " * under the terms of the GNU General Public License\n");
+        fprintf(fp_write, " * as published by the Free Software Foundation,\n");
+        fprintf(fp_write, " * either version 3 of the License, or (at your option) any later version.\n");
+        fprintf(fp_write, " * This program is distributed in the hope that it will be useful,\n");
+        fprintf(fp_write, " * but WITHOUT ANY WARRANTY; without even the implied warranty of\n");
+        fprintf(fp_write, " * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n");
+        fprintf(fp_write, " * See the GNU General Public License for more details.\n");
+        fprintf(fp_write, " * You should have received a copy of the GNU General Public License\n");
+        fprintf(fp_write, " * along with this program.\n");
+        fprintf(fp_write, " * If not, see <https://www.gnu.org/licenses/>.\n");
+    }
+    fprintf(fp_write, " *\n");
+    fprintf(fp_write, " */\n");
+    fprintf(fp_write, "\n");
+    fprintf(fp_write, "/**\n");
+    fprintf(fp_write, " @file    patrons.h\n");
+    fprintf(fp_write, " @brief    Code to post current patrons\n");
+    fprintf(fp_write, " */\n");
+
+    fprintf(fp_write, "\n");
+    fprintf(fp_write, "#include \"ext.h\"\n");
+    fprintf(fp_write, "\n");
+
+    char buf[8192];
+    t_patron patrons[256];
+    long i = 0;
+    int p = 0;
+    long name_col = 0, status_col = 3, pledge_col = 6;
+    while (fgets(buf, sizeof(buf), fp_read) != NULL)
+    {
+        int j = 0;
+
+        char *string, *tofree, *token;
+        tofree = string = strdup(buf);
+        // loop through the string to extract all other tokens
+        while ((token = strsep(&string, ",")) != NULL) {
+            if (i == 0) { // first line
+                if (strcmp(token, "Name") == 0)
+                    name_col = j;
+                else if (strcmp(token, "Patron Status") == 0)
+                    status_col = j;
+                else if (strcmp(token, "Pledge $") == 0)
+                    pledge_col = j;
+            } else {
+                if (j == name_col)
+                    strncpy(patrons[p].name, token, MIN(strlen(token)+1, 128));
+                if (j == status_col)
+                    patrons[p].active = (strcmp(token, "Active patron") == 0) ? 1 : 0;
+                if (j == pledge_col)
+                    patrons[p].pledge = atol(token+1);
+            }
+            j++;
+        }
+        free(tofree);
+        if (i != 0)
+            p++;
+        i++;
+    }
+    
+    long count_top = 0;
+    long count_active = 0;
+    
+    fprintf(fp_write, "void post_top_supporters()\n");
+    fprintf(fp_write, "{\n");
+    for (long i = 0; i < p; i++) {
+        if (patrons[i].active && patrons[i].pledge >= min_top_supporters_pledge) { // top supporters
+            count_top++;
+            fprintf(fp_write, "\tpost(\"- %s\");\n", patrons[i].name);
+        }
+    }
+    fprintf(fp_write, "}\n");
+
+    fprintf(fp_write, "\n");
+    
+    fprintf(fp_write, "void post_all_patrons()\n");
+    fprintf(fp_write, "{\n");
+    const long max_line_len = 128;
+    buf[0] = 0;
+    long cur = 0;
+    long last_active = 0;
+    for (long i = 0; i < p; i++) {
+        if (patrons[i].active)
+            last_active = i;
+    }
+    for (long i = 0; i < p; i++) {
+        if (patrons[i].active) {
+            count_active++;
+            if (cur + strlen(patrons[i].name) > max_line_len) {
+                if (cur > 0) {
+                    fprintf(fp_write, "\tpost(\"%s\");\n", buf);
+                    cur = sprintf(buf, "%s, ", patrons[i].name);
+                } else { // name too long
+                    fprintf(fp_write, "\tpost(\"%s%s\");\n", patrons[i].name, i==last_active ? "." : ", ");
+                }
+            } else {
+                cur += sprintf(buf+cur, "%s%s", patrons[i].name, i==last_active ? "." : ", ");
+            }
+        }
+    }
+    if (buf[0]) {
+        fprintf(fp_write, "\tpost(\"%s\");\n", buf);
+    }
+    fprintf(fp_write, "}\n");
+
+    [error_log setString:[NSString stringWithFormat: @"%@ Correctly exported code for %ld patrons (of which %ld top supporters).\n", [error_log string], count_active, count_top]];
+    
+    fclose(fp_write);
+    fclose(fp_read);
+}
+                  
