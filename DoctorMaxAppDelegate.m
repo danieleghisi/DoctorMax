@@ -476,7 +476,15 @@ int modules_cmp_alphabetically(const void *a, const void *b)
 - (BOOL)application:(NSApplication *)theApplication openFile:(NSString *)filename
 {
 	NSString *fh = [NSString stringWithContentsOfFile:filename encoding:NSUTF8StringEncoding error:NULL];
-	long i = 0; 
+	long i = 0;
+
+    [patrons_build setState:0];
+    [patrons_source_csv setStringValue:@""];
+    [patrons_target_h setStringValue:@""];
+    [patrons_addgpl3license setState:0];
+    [patrons_copyright setStringValue:@""];
+    [patrons_mintopsupporterpledge setStringValue:@""];
+    
 	for (NSString *line in [fh componentsSeparatedByString:@"\n"]) {
 		i++;
 		switch (i) {

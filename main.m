@@ -412,6 +412,7 @@ void harvest_aliases(char *path, char recursive, NSTextView *error_log)
                             char line[MAX_LINE_CHARS];
                             char name[MAX_SINGLE_ELEM_CHARS];
                             char realname[MAX_SINGLE_ELEM_CHARS];
+                            char alias[MAX_SINGLE_ELEM_CHARS];
                             name[0] = realname[0] = 0;
                             while (true) {
                                 if (fgets(line, sizeof line, fp_read) == NULL)
@@ -453,6 +454,32 @@ void harvest_aliases(char *path, char recursive, NSTextView *error_log)
                             }
                             
                             fclose(fp_read);
+                            
+                            // aliases
+                            fp_read = fopen(fullfilename_read, "r");
+                            while (true) {
+                                if (fgets(line, sizeof line, fp_read) == NULL)
+                                    break;
+                                
+                                char *trimmed = lefttrim(line, false);
+                                if (trimmed) {
+                                    if (strncmp(trimmed, "@alias", 6) == 0) {
+                                        trimmed = lefttrim(trimmed + 6, false);
+                                        [error_log setString:[NSString stringWithFormat: @"%@ %s %s\n", [error_log string], "Adding alias", trimmed]];
+                                        while (!trimmed && fgets(line, sizeof line, fp_read) != NULL)
+                                            trimmed = lefttrim(line, true);
+                                        if (trimmed) {
+                                            strncpy(alias, trimmed, MAX_SINGLE_ELEM_CHARS-1);
+                                            alias[MAX_SINGLE_ELEM_CHARS-1] = 0;
+                                            righttrim(alias, true);
+                                            if (realname[0])
+                                                add_alias(alias, realname);
+                                        }
+                                    }
+                                }
+                            }
+                            fclose(fp_read);
+                            
                             
                         }
                     }
@@ -835,6 +862,16 @@ void process_file(char export_XMLs, char *path, char *filename,
                     strncpy(obj_hiddenalias, trimmed, MAX_SINGLE_ELEM_CHARS - 1);
                 righttrim(obj_hiddenalias, true);
 
+            } else if (!parsing_sub_file && !parsing_substitution_file && obj_hiddenalias[0] == 0 && strncmp(trimmed, "@alias", 6) == 0) {
+                found = true;
+                description_ongoing = discussion_ongoing = 0;
+                trimmed = lefttrim(trimmed + 6, false);
+                while (!trimmed && fgets(line, sizeof line, fp_read) != NULL)
+                    trimmed = lefttrim(line, true);
+                if (trimmed)
+                    strncpy(obj_hiddenalias, trimmed, MAX_SINGLE_ELEM_CHARS - 1);
+                righttrim(obj_hiddenalias, true);
+                
             } else if (!parsing_sub_file && !parsing_substitution_file && module[0] == 0 && strncmp(trimmed, "@module", 7) == 0) {
 				found = true;
 				description_ongoing = discussion_ongoing = 0;
@@ -1391,7 +1428,7 @@ void process_file(char export_XMLs, char *path, char *filename,
 								pch = strtok (NULL, "+");
 							}
 							
-							if (all_found)
+							if (!all_found)
 								attr_undocumented[curr_attr] = true; // excluded! needed for dada
 						}
 						found = true;
@@ -3315,8 +3352,22 @@ typedef struct _patron {
     short int pledge;
 } t_patron;
 
+
+
+int patron_cmp(const void *a, const void *b) {
+    t_patron *aa = (t_patron *)a;
+    t_patron *bb = (t_patron *)b;
+    
+    // comparing names
+    return strcmp(aa->name, bb->name);
+}
+
+
 void producePatronsCode(const char *source_members_CSV, const char *target_file, NSTextView *error_log, char addGpl3License, const char *copyright, short int min_top_supporters_pledge)
 {
+    // IT WOULD BE NICE HERE TO DOWNLOAD AUTOMATICALLY BUT THAT DOES NOT SEEM EASY WITH PATREON AUTHENTICATIONS
+    // DONT WANT TO GET INTO OATH STUFF ETC
+    
     FILE *fp_write = fopen(target_file, "w");
     FILE *fp_read = fopen(source_members_CSV, "r");
 
@@ -3403,6 +3454,15 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
     long count_top = 0;
     long count_active = 0;
     
+    qsort(patrons, p, sizeof(t_patron), patron_cmp);
+
+    // remove trailing spaces
+    for (long i = 0; i < p; i++) {
+        while (strlen(patrons[i].name) > 0 && patrons[i].name[strlen(patrons[i].name)-1] == ' ') {
+            patrons[i].name[strlen(patrons[i].name)-1] = 0;
+        }
+    }
+
     fprintf(fp_write, "void post_top_supporters()\n");
     fprintf(fp_write, "{\n");
     for (long i = 0; i < p; i++) {
