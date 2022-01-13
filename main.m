@@ -832,7 +832,11 @@ void process_file(char export_XMLs, char *path, char *filename,
 		
 		if (trimmed) {
 			
-			if (!parsing_sub_file && !parsing_substitution_file && obj_name[0] == 0 && strncmp(trimmed, "@name", 5) == 0) {
+            if (!parsing_sub_file && !parsing_substitution_file && obj_name[0] == 0 && strncmp(trimmed, "@file", 5) == 0)
+                header = true;
+			
+            if (!parsing_sub_file && !parsing_substitution_file && obj_name[0] == 0 && strncmp(trimmed, "@name", 5) == 0) {
+                header = true;
 				found = true;
 				description_ongoing = discussion_ongoing = 0;
 				trimmed = lefttrim(trimmed + 5, false);
@@ -925,7 +929,7 @@ void process_file(char export_XMLs, char *path, char *filename,
 				trimmed = lefttrim(trimmed + 8, false);
 				while (!trimmed && fgets(line, sizeof line, fp_read) != NULL) 
 					trimmed = lefttrim(line, true);
-				if (trimmed && strncmp(trimmed, "YES", 3) == 0 || strncmp(trimmed, "yes", 3) == 0 || strncmp(trimmed, "Yes", 3) == 0) 
+				if (trimmed && (strncmp(trimmed, "YES", 3) == 0 || strncmp(trimmed, "yes", 3) == 0 || strncmp(trimmed, "Yes", 3) == 0))
 					has_palette = true;
 			} else if (!parsing_sub_file && !parsing_substitution_file && strncmp(trimmed, "@illustration", 13) == 0) {
 				found = true;
