@@ -10,6 +10,7 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		1E1F6EBE181DBB6C006DC495 /* MySaveMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E1F6EBD181DBB6C006DC495 /* MySaveMenuController.m */; };
 		1EF5993B1C49372600AA32E7 /* DMEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EF5993A1C49372600AA32E7 /* DMEntry.m */; };
+		1EFBD6B927F8A52F00BB03D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1EFBD6B827F8A52F00BB03D0 /* Assets.xcassets */; };
 		256AC3DA0F4B6AC300CF3369 /* DoctorMaxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* DoctorMaxAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -26,6 +27,7 @@
 		1EC105871C488D2D00AAF522 /* DoctorMax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorMax.h; sourceTree = "<group>"; };
 		1EF599391C49372600AA32E7 /* DMEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMEntry.h; sourceTree = "<group>"; };
 		1EF5993A1C49372600AA32E7 /* DMEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMEntry.m; sourceTree = "<group>"; };
+		1EFBD6B827F8A52F00BB03D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		256AC3D80F4B6AC300CF3369 /* DoctorMaxAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorMaxAppDelegate.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* DoctorMaxAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoctorMaxAppDelegate.m; sourceTree = "<group>"; };
 		256AC3F00F4B6AF500CF3369 /* DoctorMax_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DoctorMax_Prefix.pch; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				1EC105871C488D2D00AAF522 /* DoctorMax.h */,
 				256AC3D80F4B6AC300CF3369 /* DoctorMaxAppDelegate.h */,
 				256AC3D90F4B6AC300CF3369 /* DoctorMaxAppDelegate.m */,
+				1EFBD6B827F8A52F00BB03D0 /* Assets.xcassets */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1EFBD6B927F8A52F00BB03D0 /* Assets.xcassets in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +229,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -243,6 +249,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

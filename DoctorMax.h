@@ -15,11 +15,11 @@
 // This flag must only be defined when using Doctor Max while compiling references of the bach library:
 #define BACH_REF
 
-// Only used by bach (somehow private)
-#define SOURCES_PATH_NOTATION_MAXINTERFACE "/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/notation/notation_maxinterface.c"
-#define BACH_TUTORIAL_FOLDER "/Users/danieleghisi/Documents/Max 7/Packages/bach/docs/tutorials/bach-tut"
-#define SOURCES_PATH_DADA_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 7/Packages/dada/source/commons/dada.object.c"
-#define SOURCES_PATH_EARS_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 7/Packages/ears/source/commons/ears.buf.object.c"
+// Only used by me (Daniele) for the bach family (somehow private)
+#define SOURCES_PATH_NOTATION_MAXINTERFACE "/Users/danieleghisi/Documents/Max 8/Packages/bach/source/commons/notation/notation_maxinterface.c"
+#define BACH_TUTORIAL_FOLDER "/Users/danieleghisi/Documents/Max 8/Packages/bach/docs/tutorials/bach-tut"
+#define SOURCES_PATH_DADA_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 8/Packages/dada/source/commons/dada.object.c"
+#define SOURCES_PATH_EARS_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 8/Packages/ears/source/commons/ears.buf.object.c"
 
 #define MAX_DESCRIPTION_LINES 800
 #define MAX_DISCUSSION_LINES 100

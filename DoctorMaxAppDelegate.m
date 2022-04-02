@@ -18,24 +18,24 @@
 	// Insert code here to initialize your application 
 	
 #ifdef BACH_REF // bach initialization
-    [source_folder1 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/mains/"];
-	[source_folder2 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/abstractions/"];
+    [source_folder1 setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/source/mains/"];
+	[source_folder2 setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/source/abstractions/"];
     [source_folder3 setStringValue:@""];
     [source_folder4 setStringValue:@""];
     [recursive_folder1 setState:1];
     [recursive_folder2 setState:1];
-	[commonref_file1 setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/doc/bach_doc_commons.h"];
+	[commonref_file1 setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/source/commons/doc/bach_doc_commons.h"];
 	[commonref_file2 setStringValue:@""];
     [commonref_file3 setStringValue:@""];
-	[substitutions_file setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/doc/bach_doc_substitutions.h"];
-    [xml_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/docs/refpages/bach_ref"];
-	[txt_init_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/init"];
-	[json_interfaces_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/interfaces"];
+	[substitutions_file setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/source/commons/doc/bach_doc_substitutions.h"];
+    [xml_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/docs/refpages/bach_ref"];
+	[txt_init_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/init"];
+	[json_interfaces_output_folder setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/interfaces"];
 	[library_name setStringValue:@"bach"];
     [math_category setStringValue:@"bach math"];
-    [help_source_folder setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/help"];
+    [help_source_folder setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/help"];
     [help_router setStringValue:@"bach.help"];
-    [help_output_filename setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/help/bach.help.json"];
+    [help_output_filename setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/help/bach.help.json"];
     [help_exclude setStringValue:@"bach.help.home.maxpat, bach.help.search.maxpat, bach.help.searchtag.maxpat"];
     [help_build setState:1];
     [help_recursive setState:0];
@@ -43,7 +43,7 @@
     [only_if_it_has_arguments setState:1];
     [patrons_build setState:1];
     [patrons_source_csv setStringValue:@"/Users/danieleghisi/Downloads/Members_2774862.csv"];
-    [patrons_target_h setStringValue:@"/Users/danieleghisi/Documents/Max 7/Packages/bach/source/commons/patreon/patrons.h"];
+    [patrons_target_h setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/source/commons/patreon/patrons.h"];
     [patrons_addgpl3license setState:1];
     
     time_t t = time(NULL);
