@@ -124,6 +124,7 @@ void produceFiles(char export_XMLs, char export_TXTs,
 	
 	if (export_TXTs && write_database_init) {
 		snprintf(temp, 299, "%s/%s-database.txt", init_TXT_output_folder, library_name);
+        temp[299] = 0;
 		[error_log setString:[NSString stringWithFormat: @"%@ A database file will be written.\n", [error_log string]]];
 		fp_database = fopen(temp, "w");
 		
@@ -133,6 +134,7 @@ void produceFiles(char export_XMLs, char export_TXTs,
 	
 	if (export_TXTs && write_objectlist_init) {
 		snprintf(temp, 299, "%s/%s-objectlist.txt", init_TXT_output_folder, library_name);
+        temp[299] = 0;
 		[error_log setString:[NSString stringWithFormat: @"%@ An objectlist file will be written.\n", [error_log string]]];
 		fp_objectlist = fopen(temp, "w");
 		
@@ -142,6 +144,7 @@ void produceFiles(char export_XMLs, char export_TXTs,
 	
 	if (export_TXTs && write_objectmappings_init) {
 		snprintf(temp, 299, "%s/%s-objectmappings.txt", init_TXT_output_folder, library_name);
+        temp[299] = 0;
 		[error_log setString:[NSString stringWithFormat: @"%@ An objectmappings file will be written.\n", [error_log string]]];
 		fp_objectmappings = fopen(temp, "w");
 		
@@ -151,6 +154,7 @@ void produceFiles(char export_XMLs, char export_TXTs,
 	
 	if (write_c74contents) {
 		snprintf(temp, 299, "%s/_c74_contents.xml", XML_output_folder);
+        temp[299] = 0;
 		[error_log setString:[NSString stringWithFormat: @"%@ The _c74_contents.xml file will be written.\n", [error_log string]]];
 		fp_c74contents = fopen(temp, "w");
 		
@@ -164,6 +168,7 @@ void produceFiles(char export_XMLs, char export_TXTs,
 	
 	if (write_object_qlookup) {
 		snprintf(temp, 299, "%s/%s-obj-qlookup.json", interfaces_JSON_output_folder, library_name);
+        temp[299] = 0;
 		[error_log setString:[NSString stringWithFormat: @"%@ An interfaces obj-qlookup file will be written.\n", [error_log string]]];
 		fp_object_qlookup = fopen(temp, "w");
 		
@@ -318,6 +323,7 @@ void process_directory(char export_XMLs, char *path, char recursive,
 					if (recursive) {
 						char buf[PATH_MAX + 1]; 
 						snprintf(buf, PATH_MAX, "%s/%s", path, ent->d_name);
+                        buf[PATH_MAX] = 0;
 //						realpath(ent->d_name, buf); // buf + 60
 						process_directory(export_XMLs, buf, recursive,
 										  common_ref_file1, common_ref_file2, common_ref_file3, XML_output_folder,
@@ -392,6 +398,7 @@ void harvest_aliases(char *path, char recursive, NSTextView *error_log)
                     if (recursive) {
                         char buf[PATH_MAX + 1];
                         snprintf(buf, PATH_MAX, "%s/%s", path, ent->d_name);
+                        buf[PATH_MAX] = 0;
                         harvest_aliases(buf, recursive, error_log);
                     }
                 } else {
@@ -3084,6 +3091,7 @@ void process_help_directory(char *source_folder, char recursive, char *help_rout
                         char buf[PATH_MAX + 1];
                         snprintf(buf, PATH_MAX, "%s/%s", source_folder, ent->d_name);
                         //						realpath(ent->d_name, buf); // buf + 60
+                        buf[PATH_MAX] = 0;
                         process_help_directory(source_folder, recursive, help_router, output_file, progress_label, error_log, stats, num_exclude_files, exclude_files);
                     }
                 } else {
@@ -3169,6 +3177,7 @@ void produceHelpFiles(const char *source_folder, char recursive, const char *hel
     if (true) {
         char temp[300];
         snprintf(temp, 299, "%s", output_file);
+        temp[299] = 0;
         [error_log setString:[NSString stringWithFormat: @"%@ A json help center file will be written.\n", [error_log string]]];
         fp_write = fopen(temp, "w");
         

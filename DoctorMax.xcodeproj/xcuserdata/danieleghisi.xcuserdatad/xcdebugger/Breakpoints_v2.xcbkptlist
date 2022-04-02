@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2792"
             endingLineNumber = "2792"
-            landmarkName = "replace_char"
+            landmarkName = "obtain_common_reference"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
