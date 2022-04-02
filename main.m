@@ -535,8 +535,9 @@ void tutorial_name_to_filename(const char *tutorial_name, char *tutorial_folder,
 				if (strstr(ent->d_name, tutorial_name)) {
 					char *found = strstr(ent->d_name, ".maxtut");
 					if (found) {
+                        long zeropos = ((long)found - (long)ent->d_name);
 						strncpy(output_name, ent->d_name, MAX_SINGLE_ELEM_CHARS);
-						output_name[found - ent->d_name] = 0;
+						output_name[zeropos] = 0;
 					}
 				}
 			}
