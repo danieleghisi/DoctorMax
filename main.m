@@ -2451,6 +2451,7 @@ void process_file(char export_XMLs, char *path, char *filename,
 					
 					/// FIND TUTORIAL INDEX
 					char tutorial_file_name[MAX_SINGLE_ELEM_CHARS];
+                    tutorial_file_name[0] = 0;
 					if (for_bach)
 						tutorial_name_to_filename(seealso[i], BACH_TUTORIAL_FOLDER, tutorial_file_name);
 					else
