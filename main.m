@@ -3448,7 +3448,7 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
                     name_col = j;
                 else if (strcmp(token, "Patron Status") == 0)
                     status_col = j;
-                else if (strcmp(token, "Pledge $") == 0)
+                else if (strcmp(token, "Pledge Amount") == 0)
                     pledge_col = j;
             } else {
                 if (j == name_col)
@@ -3456,7 +3456,7 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
                 if (j == status_col)
                     patrons[p].active = (strcmp(token, "Active patron") == 0) ? 1 : 0;
                 if (j == pledge_col)
-                    patrons[p].pledge = atol(token+1);
+                    patrons[p].pledge = (long)round(atof(token));
             }
             j++;
         }

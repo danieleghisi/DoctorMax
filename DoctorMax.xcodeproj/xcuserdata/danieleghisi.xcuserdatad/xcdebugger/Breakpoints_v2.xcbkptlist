@@ -51,7 +51,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2793"
             endingLineNumber = "2793"
-            landmarkName = "obtain_common_reference"
+            landmarkName = "obtain_common_reference(ref_tag, lines_to_add, num_lines_to_add, reference_path, common_ref_file1, common_ref_file2, common_ref_file3, error_log, no_spaces_tag, only_copy_slashed_lines)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -68,7 +68,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2799"
             endingLineNumber = "2799"
-            landmarkName = "replace_char"
+            landmarkName = "replace_char(string, allocated_size, char_to_replace, replacement_string)"
             landmarkType = "9">
             <Locations>
                <Location
@@ -104,23 +104,6 @@
                   offsetFromSymbolStart = "510">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "50C086C6-5F72-4C3C-8A7C-EAEF0E45C034"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "main.m"
-            timestampString = "670603138.6495759"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2460"
-            endingLineNumber = "2460"
-            landmarkName = "process_file"
-            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
