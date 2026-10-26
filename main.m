@@ -1167,7 +1167,16 @@ void process_file(char export_XMLs, char *path, char *filename,
 				} else {
 					parsing_sub_file = true;
 				}
-				
+
+            } else if (!parsing_sub_file && strncmp(trimmed, "orchidea_searcher_class_init", 28) == 0) { // Gotta parse the notation attributes
+                fp_subread = fopen(SOURCES_PATH_ORCHIDEA_SEARCHER_COMMONS, "r");
+                
+                if (fp_subread == NULL) {
+                    [error_log setString:[NSString stringWithFormat: @"%@ Failed to open orchidea.searcher.commons.h for read.\n", [error_log string]]];
+                } else {
+                    parsing_sub_file = true;
+                }
+
 			} else if (strncmp(trimmed, "CLASS_ATTR_", 11) == 0) {
 				// attribute!
 				// retrieving name.
@@ -3016,13 +3025,31 @@ void process_help_file(char *filename, char *source_path, char *help_router, FIL
                     if (last_text[len-2] == '"')
                         last_text[len-2] = 0;
                 }
+            } else if (strncmp(trimmed, "\"text\": ", 8) == 0) {
+                strncpy(last_text, trimmed + 9, MAX_LINE_CHARS - 1);
+                righttrim(last_text, false);
+                long len = strlen(last_text);
+                if (len > 2) {
+                    if (last_text[len-1] == ',')
+                        last_text[len-1] = 0;
+                    if (last_text[len-2] == '"')
+                        last_text[len-2] = 0;
+                }
             } else if (strncmp(trimmed, "\"varname\" : \"objects\"", 21) == 0) {
                 split_string(last_text + 9, ",", object, MAX_HELP_FILE_NUM_OBJS, &num_objects);
+            } else if (strncmp(trimmed, "\"varname\": \"objects\"", 20) == 0) {
+                split_string(last_text + 8, ",", object, MAX_HELP_FILE_NUM_OBJS, &num_objects);
             } else if (strncmp(trimmed, "\"varname\" : \"seealso\"", 21) == 0) {
                 split_string(last_text + 9, ",", seealso, MAX_SEEALSO_ELEMS, &num_seealso);
+            } else if (strncmp(trimmed, "\"varname\": \"seealso\"", 20) == 0) {
+                split_string(last_text + 8, ",", seealso, MAX_SEEALSO_ELEMS, &num_seealso);
             } else if (strncmp(trimmed, "\"varname\" : \"tags\"", 18) == 0) {
                 split_string(last_text + 6, ",", keyword, MAX_KEYWORDS, &num_keywords);
+            } else if (strncmp(trimmed, "\"varname\": \"tags\"", 17) == 0) {
+                split_string(last_text + 5, ",", keyword, MAX_KEYWORDS, &num_keywords);
             } else if (strncmp(trimmed, "\"varname\" : \"title\"", 19) == 0) {
+                strncpy(title, last_text, MAX_SINGLE_ELEM_CHARS - 1);
+            } else if (strncmp(trimmed, "\"varname\": \"title\"", 18) == 0) {
                 strncpy(title, last_text, MAX_SINGLE_ELEM_CHARS - 1);
             }
         }
@@ -3361,13 +3388,22 @@ void produceHelpFiles(const char *source_folder, char recursive, const char *hel
 
 /// PATREON STUFF
 
+const double annual_discount_percentage = 5.; // may/should be exposed in the future...
+
 typedef struct _patron {
     char name[128];
     char active;
     short int pledge;
+    char annual;
 } t_patron;
 
-
+short int patron_get_monthly_pledge(t_patron *patron)
+{
+    if (!patron->annual)
+        return patron->pledge;
+    else
+        return (short int)ceil(((patron->pledge)/(1 - annual_discount_percentage/100.)) /12.); // let's be generous and round up! patron->pledge was already rounded up ;)
+}
 
 int patron_cmp(const void *a, const void *b) {
     t_patron *aa = (t_patron *)a;
@@ -3431,10 +3467,10 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
     fprintf(fp_write, "\n");
 
     char buf[8192];
-    t_patron patrons[256];
+    t_patron patrons[8192];
     long i = 0;
     int p = 0;
-    long name_col = 0, status_col = 3, pledge_col = 6;
+    long name_col = 0, status_col = 3, pledge_col = 8, chargefreq_col = 9; // no worries, these are changed here below
     while (fgets(buf, sizeof(buf), fp_read) != NULL)
     {
         int j = 0;
@@ -3450,13 +3486,23 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
                     status_col = j;
                 else if (strcmp(token, "Pledge Amount") == 0)
                     pledge_col = j;
+                else if (strcmp(token, "Charge Frequency") == 0)
+                    chargefreq_col = j;
             } else {
-                if (j == name_col)
+                if (j == name_col) {
                     strncpy(patrons[p].name, token, MIN(strlen(token)+1, 128));
+                    patrons[p].name[MIN(strlen(token), 127)] = 0;
+                    // trim trailing spaces
+                    while (strlen(patrons[p].name) > 0 && patrons[p].name[strlen(patrons[p].name)-1] == ' ') {
+                        patrons[p].name[strlen(patrons[p].name)-1] = 0;
+                    }
+                }
                 if (j == status_col)
                     patrons[p].active = (strcmp(token, "Active patron") == 0) ? 1 : 0;
                 if (j == pledge_col)
-                    patrons[p].pledge = (long)round(atof(token));
+                    patrons[p].pledge = (long)ceil(atof(token)); // let's be generous and round up!
+                if (j == chargefreq_col)
+                    patrons[p].annual = (strcmp(token, "annual") == 0) ? 1 : 0;
             }
             j++;
         }
@@ -3464,10 +3510,17 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
         if (i != 0)
             p++;
         i++;
+        
+        if (p >= 8192) {
+            [error_log setString:[NSString stringWithFormat: @"%@ Too many patrons, ignoring more.\n", [error_log string]]];
+            break;
+        }
     }
     
     long count_top = 0;
     long count_active = 0;
+    long count_institutional = 0;
+    long count_ordinary = 0;
     
     qsort(patrons, p, sizeof(t_patron), patron_cmp);
 
@@ -3478,23 +3531,71 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
         }
     }
 
+    long min_institutional_supporters_pledge = LONG_MAX;
+    
+#ifdef BACH_REF
+    min_institutional_supporters_pledge = 128;
+    fprintf(fp_write, "void post_institutional_supporters()\n");
+    fprintf(fp_write, "{\n");
+    for (long i = 0; i < p; i++) {
+        short int monthly_pledge = patron_get_monthly_pledge(&(patrons[i]));
+        if (patrons[i].active && monthly_pledge >= min_institutional_supporters_pledge) { // institutional supporters
+            count_institutional++;
+            fprintf(fp_write, "\tpost(\"- %s\");\n", patrons[i].name);
+        }
+    }
+    fprintf(fp_write, "}\n");
+    fprintf(fp_write, "\n");
+#endif
+    
     fprintf(fp_write, "void post_top_supporters()\n");
     fprintf(fp_write, "{\n");
     for (long i = 0; i < p; i++) {
-        if (patrons[i].active && patrons[i].pledge >= min_top_supporters_pledge) { // top supporters
+        short int monthly_pledge = patron_get_monthly_pledge(&(patrons[i]));
+        if (patrons[i].active && monthly_pledge >= min_top_supporters_pledge && monthly_pledge < min_institutional_supporters_pledge) { // top supporters
             count_top++;
             fprintf(fp_write, "\tpost(\"- %s\");\n", patrons[i].name);
         }
     }
     fprintf(fp_write, "}\n");
-
     fprintf(fp_write, "\n");
+
+    const long max_line_len = 128;
+    long cur = 0;
+
+    fprintf(fp_write, "void post_ordinary_supporters()\n");
+    fprintf(fp_write, "{\n");
+    buf[0] = 0;
+    long last_ord = 0;
+    for (long i = 0; i < p; i++) {
+        if (patrons[i].active && patron_get_monthly_pledge(&(patrons[i])) < min_top_supporters_pledge)
+            last_ord = i;
+    }
+    for (long i = 0; i < p; i++) {
+        if (patrons[i].active && patron_get_monthly_pledge(&(patrons[i])) < min_top_supporters_pledge) {
+            count_ordinary++;
+            if (cur + strlen(patrons[i].name) > max_line_len) {
+                if (cur > 0) {
+                    fprintf(fp_write, "\tpost(\"%s\");\n", buf);
+                    cur = sprintf(buf, "%s, ", patrons[i].name);
+                } else { // name too long
+                    fprintf(fp_write, "\tpost(\"%s%s\");\n", patrons[i].name, i==last_ord ? "." : ", ");
+                }
+            } else {
+                cur += sprintf(buf+cur, "%s%s", patrons[i].name, i==last_ord ? "." : ", ");
+            }
+        }
+    }
+    if (buf[0]) {
+        fprintf(fp_write, "\tpost(\"%s\");\n", buf);
+    }
+    fprintf(fp_write, "}\n");
+    
     
     fprintf(fp_write, "void post_all_patrons()\n");
     fprintf(fp_write, "{\n");
-    const long max_line_len = 128;
     buf[0] = 0;
-    long cur = 0;
+    cur = 0;
     long last_active = 0;
     for (long i = 0; i < p; i++) {
         if (patrons[i].active)
@@ -3520,8 +3621,11 @@ void producePatronsCode(const char *source_members_CSV, const char *target_file,
     }
     fprintf(fp_write, "}\n");
 
+#ifdef BACH_REF
+    [error_log setString:[NSString stringWithFormat: @"%@ Correctly exported code for %ld patrons (of which %ld institutional supporters, %ld top supporters and %ld ordinary supporters).\n", [error_log string], count_active, count_institutional, count_top, count_ordinary]];
+#else
     [error_log setString:[NSString stringWithFormat: @"%@ Correctly exported code for %ld patrons (of which %ld top supporters).\n", [error_log string], count_active, count_top]];
-    
+#endif
     fclose(fp_write);
     fclose(fp_read);
 }

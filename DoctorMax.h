@@ -20,6 +20,7 @@
 #define BACH_TUTORIAL_FOLDER "/Users/danieleghisi/Documents/Max 8/Packages/bach/docs/tutorials/bach-tut"
 #define SOURCES_PATH_DADA_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 8/Packages/dada/source/commons/dada.object.c"
 #define SOURCES_PATH_EARS_OBJ_COMMONS "/Users/danieleghisi/Documents/Max 8/Packages/ears/source/commons/ears.buf.object.c"
+#define SOURCES_PATH_ORCHIDEA_SEARCHER_COMMONS "/Users/danieleghisi/Dropbox/RD/orchidea/max/src/orchidea_Max/commons/orchidea.searcher.commons.h"
 
 #define MAX_DESCRIPTION_LINES 800
 #define MAX_DISCUSSION_LINES 100

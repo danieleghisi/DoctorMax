@@ -49,8 +49,8 @@
             timestampString = "670603138.648641"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2793"
-            endingLineNumber = "2793"
+            startingLineNumber = "2802"
+            endingLineNumber = "2802"
             landmarkName = "obtain_common_reference(ref_tag, lines_to_add, num_lines_to_add, reference_path, common_ref_file1, common_ref_file2, common_ref_file3, error_log, no_spaces_tag, only_copy_slashed_lines)"
             landmarkType = "9">
          </BreakpointContent>
@@ -66,44 +66,10 @@
             timestampString = "670603138.6491179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2799"
-            endingLineNumber = "2799"
+            startingLineNumber = "2808"
+            endingLineNumber = "2808"
             landmarkName = "replace_char(string, allocated_size, char_to_replace, replacement_string)"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "BC511A1B-9B23-40C5-8116-09E3DB549C27 - 10208a73e4364b6a"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "replace_char"
-                  moduleName = "Doctor Max"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danieleghisi/DoctorMax/main.m"
-                  timestampString = "590665747.403403"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2764"
-                  endingLineNumber = "2764"
-                  offsetFromSymbolStart = "506">
-               </Location>
-               <Location
-                  uuid = "BC511A1B-9B23-40C5-8116-09E3DB549C27 - 10208a73e4364b6a"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "replace_char"
-                  moduleName = "Doctor Max"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danieleghisi/DoctorMax/main.m"
-                  timestampString = "590665747.406307"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2764"
-                  endingLineNumber = "2764"
-                  offsetFromSymbolStart = "510">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

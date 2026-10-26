@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[DoctorMaxAppDelegate CreateFiles:]:DoctorMaxAppDelegate.m">
-      </ContextState>
-      <ContextState
-         contextName = "process_file:main.m">
+         contextName = "producePatronsCode:main.m">
          <PersistentStrings>
             <PersistentString
-               value = "method_name[curr_method]">
+               value = "patrons[p]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -24,6 +21,17 @@
             </PersistentString>
             <PersistentString
                value = "section[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[DoctorMaxAppDelegate CreateFiles:]:DoctorMaxAppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "process_file:main.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "method_name[curr_method]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -42,7 +42,7 @@
     [add_syntax_to_messages setState:1];
     [only_if_it_has_arguments setState:1];
     [patrons_build setState:1];
-    [patrons_source_csv setStringValue:@"/Users/danieleghisi/Downloads/Members_2774862.csv"];
+    [patrons_source_csv setStringValue:@"/Users/danieleghisi/Downloads/20260710-members-2774862-bachproject.csv"];
     [patrons_target_h setStringValue:@"/Users/danieleghisi/Documents/Max 8/Packages/bach/source/commons/patreon/patrons.h"];
     [patrons_addgpl3license setState:1];
     
